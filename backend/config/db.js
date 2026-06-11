@@ -4,6 +4,9 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 export async function connectDB() {
   let uri = process.env.MONGODB_URI;
 
+  console.log("URI EXISTS:", !!process.env.MONGODB_URI);
+  console.log("URI START:", process.env.MONGODB_URI?.substring(0, 30));
+  
   if (!uri || uri.includes('<username>')) {
     console.log('MONGODB_URI not configured; starting in-memory MongoDB...');
     const mongod = await MongoMemoryServer.create();
