@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="95" fill="#EC1C24" stroke="#000000" stroke-width="6"/>
+  <path d="M100 20 L67 110 L47 110 L100 180 L153 110 L133 110 Z" fill="#000000"/>
+  <path d="M100 30 L75 105 L60 105 L100 165 L140 105 L125 105 Z" fill="#FFFFFF"/>
+  <text x="100" y="118" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="#EC1C24">RCB</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="95" fill="#A50E2F" stroke="#D4AF37" stroke-width="6"/>
+  <path d="M100 30 L170 100 L100 170 L30 100 Z" fill="#D4AF37" opacity="0.2"/>
+  <path d="M100 45 L155 100 L100 155 L45 100 Z" fill="#D4AF37" opacity="0.4"/>
+  <path d="M100 60 L140 100 L100 140 L60 100 Z" fill="#A50E2F"/>
+  <text x="100" y="115" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="24" font-weight="900" fill="#D4AF37">PBKS</text>
+</svg>

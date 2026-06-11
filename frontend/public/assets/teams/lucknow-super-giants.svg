@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="95" fill="#A8D5E2" stroke="#1B3B6F" stroke-width="6"/>
+  <rect x="55" y="40" width="90" height="120" rx="10" fill="#1B3B6F" opacity="0.9"/>
+  <rect x="65" y="50" width="70" height="100" rx="6" fill="#A8D5E2"/>
+  <text x="100" y="108" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="26" font-weight="900" fill="#1B3B6F">LSG</text>
+</svg>

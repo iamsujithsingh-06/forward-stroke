@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="95" fill="#FFCB00" stroke="#0081E6" stroke-width="6"/>
+  <path d="M100 25 L175 120 L160 120 L175 170 L100 140 L25 170 L40 120 L25 120 Z" fill="#0081E6"/>
+  <text x="100" y="118" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="#FFCB00">CSK</text>
+</svg>
