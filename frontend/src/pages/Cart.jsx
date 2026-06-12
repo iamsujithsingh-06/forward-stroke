@@ -129,10 +129,17 @@ export default function Cart() {
                 </span>
               </div>
 
-              <button className="btn-primary w-full py-3 text-base" disabled>
-                Proceed to Checkout
-              </button>
-              <p className="text-xs text-center text-surface-400">Checkout coming soon</p>
+              <button
+  className="btn-primary w-full py-3 text-base"
+  onClick={() => {
+    alert(
+      "🎉 Your order has been successfully placed with Forward Stroke!\n\nThank you for your support ❤️\nKeep purchasing from our site and enjoy your cricket journey with us! 🏏"
+    );
+    clearCart();
+  }}
+>
+  Place Order
+</button>
 
               <Link to="/products" className="block text-center text-sm text-primary-600 dark:text-primary-400 hover:underline">
                 Continue Shopping
