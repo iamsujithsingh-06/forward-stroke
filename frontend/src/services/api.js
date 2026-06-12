@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://forward-stroke-backend.onrender.com/api',
+  baseURL: 'https://forward-stroke.onrender.com/api',
   headers: { 'Content-Type': 'application/json' },
   timeout: 15000,
 });
