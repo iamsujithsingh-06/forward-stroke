@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import Loading from '../components/Loading';
 
 export default function Cart() {
   const { items, loading, updateQuantity, removeItem, clearCart, total, itemCount } = useCart();
+  const navigate = useNavigate();
 
   if (loading) return <Loading fullPage text="Loading cart..." />;
 
@@ -131,11 +132,9 @@ export default function Cart() {
 
               <button
   className="btn-primary w-full py-3 text-base"
-  onClick={() => {
-    alert(
-      "🎉 Your order has been successfully placed with Forward Stroke!\n\nThank you for your support ❤️\nKeep purchasing from our site and enjoy your cricket journey with us! 🏏"
-    );
-    clearCart();
+  onClick={async () => {
+    await clearCart();
+    navigate('/order-success');
   }}
 >
   Place Order

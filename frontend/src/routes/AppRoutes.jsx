@@ -24,6 +24,7 @@ const Register = lazy(() => import('../pages/Register'));
 const Profile = lazy(() => import('../pages/Profile'));
 const Wishlist = lazy(() => import('../pages/Wishlist'));
 const Cart = lazy(() => import('../pages/Cart'));
+const OrderSuccess = lazy(() => import('../pages/OrderSuccess'));
 const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
 const AdminProducts = lazy(() => import('../pages/admin/AdminProducts'));
 const AdminUsers = lazy(() => import('../pages/admin/AdminUsers'));
@@ -52,6 +53,7 @@ export default function AppRoutes() {
         <Route path="/profile" element={<ProtectedRoute><L><Profile /></L></ProtectedRoute>} />
         <Route path="/wishlist" element={<ProtectedRoute><L><Wishlist /></L></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><L><Cart /></L></ProtectedRoute>} />
+        <Route path="/order-success" element={<L><OrderSuccess /></L>} />
         <Route path="*" element={<L><NotFound /></L>} />
       </Route>
 
