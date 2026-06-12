@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useWishlist } from '../hooks/useWishlist';
 import { useCart } from '../hooks/useCart';
 
-const ADMIN_EMAIL = 'sujithsinghsm@gmail.com';
+const ADMIN_EMAIL = 'sujithsinghsm6@gmail.com';
 
 const NAV_ITEMS = [
   { label: 'Home', path: '/' },

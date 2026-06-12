@@ -1,4 +1,4 @@
-const ADMIN_EMAIL = 'sujithsinghsm@gmail.com';
+const ADMIN_EMAIL = 'sujithsinghsm6@gmail.com';
 
 export function requireAdmin(req, res, next) {
   if (!req.user || req.user.role !== 'admin' || req.user.email !== ADMIN_EMAIL) {
