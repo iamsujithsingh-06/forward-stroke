@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
+import { orderService } from '../services/orderService';
 import Loading from '../components/Loading';
 
 export default function Cart() {
   const { items, loading, updateQuantity, removeItem, clearCart, total, itemCount } = useCart();
   const navigate = useNavigate();
+  const [placing, setPlacing] = useState(false);
+  const [placeError, setPlaceError] = useState('');
 
   if (loading) return <Loading fullPage text="Loading cart..." />;
 
@@ -130,14 +134,27 @@ export default function Cart() {
                 </span>
               </div>
 
+              {placeError && (
+                <p className="text-sm text-red-500 text-center">{placeError}</p>
+              )}
               <button
-  className="btn-primary w-full py-3 text-base"
+  className="btn-primary w-full py-3 text-base disabled:opacity-50"
+  disabled={placing}
   onClick={async () => {
-    await clearCart();
-    navigate('/order-success');
+    setPlacing(true);
+    setPlaceError('');
+    try {
+      await orderService.createOrder(items);
+      await clearCart();
+      navigate('/order-success');
+    } catch (err) {
+      setPlaceError(err.message || 'Failed to place order. Please try again.');
+    } finally {
+      setPlacing(false);
+    }
   }}
 >
-  Place Order
+  {placing ? 'Placing Order...' : 'Place Order'}
 </button>
 
               <Link to="/products" className="block text-center text-sm text-primary-600 dark:text-primary-400 hover:underline">
