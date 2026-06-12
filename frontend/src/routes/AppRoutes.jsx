@@ -29,6 +29,7 @@ const OrderSuccess = lazy(() => import('../pages/OrderSuccess'));
 const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
 const AdminProducts = lazy(() => import('../pages/admin/AdminProducts'));
 const AdminUsers = lazy(() => import('../pages/admin/AdminUsers'));
+const AdminOrders = lazy(() => import('../pages/admin/AdminOrders'));
 const AdminAnalytics = lazy(() => import('../pages/admin/AdminAnalytics'));
 
 const L = ({ children }) => <Suspense fallback={<Loading fullPage text="Loading..." />}>{children}</Suspense>;
@@ -62,6 +63,7 @@ export default function AppRoutes() {
       <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
         <Route index element={<L><AdminDashboard /></L>} />
         <Route path="products" element={<L><AdminProducts /></L>} />
+        <Route path="orders" element={<L><AdminOrders /></L>} />
         <Route path="users" element={<L><AdminUsers /></L>} />
         <Route path="analytics" element={<L><AdminAnalytics /></L>} />
       </Route>

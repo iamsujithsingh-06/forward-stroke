@@ -1,8 +1,8 @@
 import api from './api';
 
 export const recommendationService = {
-  getTrending: () => api.get('/api/recommendations/trending'),
-  getRelated: (productId) => api.get(`/api/recommendations/related/${productId}`),
-  getPersonalized: () => api.get('/api/recommendations/personalized'),
-  getFansAlsoLiked: () => api.get('/api/recommendations/fans-also-liked'),
+  getTrending: () => api.get('/recommendations/trending'),
+  getRelated: (productId) => api.get(`/recommendations/related/${productId}`),
+  getPersonalized: () => api.get('/recommendations/personalized'),
+  getFansAlsoLiked: () => api.get('/recommendations/fans-also-liked'),
 };

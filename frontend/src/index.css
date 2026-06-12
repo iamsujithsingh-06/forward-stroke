@@ -44,4 +44,13 @@
   .section-subheading {
     @apply text-surface-500 dark:text-surface-400 mt-1 text-sm md:text-base;
   }
+
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-toast-in {
+    animation: toast-in 0.25s ease-out;
+  }
 }

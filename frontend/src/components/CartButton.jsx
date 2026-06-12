@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useCart } from '../hooks/useCart';
+import { useToast } from '../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
 
 export default function CartButton({ productId, disabled = false, className = '' }) {
   const { isAuthenticated } = useAuth();
   const { addItem } = useCart();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
 
@@ -18,8 +20,9 @@ export default function CartButton({ productId, disabled = false, className = ''
     setAdding(true);
     try {
       await addItem(productId, 1);
-    } catch {
-      // silent
+      showToast('Added to cart!');
+    } catch (err) {
+      showToast(err.message || 'Failed to add item', 'error');
     } finally {
       setAdding(false);
     }

@@ -4,6 +4,8 @@ import { useAuth } from '../hooks/useAuth';
 import { useWishlist } from '../hooks/useWishlist';
 import { useCart } from '../hooks/useCart';
 
+const ADMIN_EMAIL = 'sujithsinghsm@gmail.com';
+
 const NAV_ITEMS = [
   { label: 'Home', path: '/' },
   { label: 'International', path: '/international' },
@@ -72,7 +74,7 @@ export default function Navbar() {
             <div className="ml-3 pl-3 border-l border-surface-300 dark:border-surface-600 flex items-center gap-2">
               {isAuthenticated ? (
                 <>
-                  {user?.role === 'admin' && (
+                  {(user?.role === 'admin' && user?.email === ADMIN_EMAIL) && (
                     <NavLink to="/admin" className={linkClass}>
                       Admin
                     </NavLink>
@@ -141,7 +143,7 @@ export default function Navbar() {
             <hr className="my-2 border-surface-200 dark:border-surface-700" />
             {isAuthenticated ? (
               <>
-                {user?.role === 'admin' && (
+                {(user?.role === 'admin' && user?.email === ADMIN_EMAIL) && (
                   <NavLink to="/admin" className={linkClass} onClick={() => setMenuOpen(false)}>
                     Admin
                   </NavLink>

@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { useWishlist } from '../hooks/useWishlist';
 import { useAuth } from '../hooks/useAuth';
+import { useToast } from '../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
 
 export default function WishlistButton({ productId, className = '' }) {
   const { isAuthenticated } = useAuth();
   const { isInWishlist, addItem, removeItem } = useWishlist();
+  const { showToast } = useToast();
   const navigate = useNavigate();
+  const [toggling, setToggling] = useState(false);
   const inWishlist = isInWishlist(productId);
 
   const handleClick = async () => {
@@ -13,21 +17,28 @@ export default function WishlistButton({ productId, className = '' }) {
       navigate('/login');
       return;
     }
+    if (toggling) return;
+    setToggling(true);
     try {
       if (inWishlist) {
         await removeItem(productId);
+        showToast('Removed from wishlist');
       } else {
         await addItem(productId);
+        showToast('Added to wishlist!');
       }
-    } catch {
-      // silent
+    } catch (err) {
+      showToast(err.message || 'Something went wrong', 'error');
+    } finally {
+      setToggling(false);
     }
   };
 
   return (
     <button
       onClick={handleClick}
-      className={`p-2 rounded-lg border transition-colors ${
+      disabled={toggling}
+      className={`p-2 rounded-lg border transition-colors disabled:opacity-50 ${
         inWishlist
           ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400'
           : 'bg-white dark:bg-surface-800 border-surface-300 dark:border-surface-600 text-surface-500 dark:text-surface-400 hover:border-red-300 dark:hover:border-red-700 hover:text-red-500'
