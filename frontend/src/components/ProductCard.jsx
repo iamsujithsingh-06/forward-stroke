@@ -8,7 +8,7 @@ const FALLBACK_IMG = 'https://placehold.co/400x500/1e293b/475569?text=Product';
 export default function ProductCard({ product }) {
   const [imgError, setImgError] = useState(false);
   const imgSrc = imgError ? FALLBACK_IMG : (product.images?.[0] || FALLBACK_IMG);
-  const inStock = product.stock > 0;
+  const inStock = true;
 
   return (
     <div className="card-hover overflow-hidden group flex flex-col">

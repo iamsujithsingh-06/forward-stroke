@@ -43,7 +43,7 @@ export default function ProductDetails() {
   if (!product) return <Error message="Product not found." />;
 
   const imgSrc = imgError ? FALLBACK_IMG : (product.images?.[0] || FALLBACK_IMG);
-  const inStock = product.stock > 0;
+  const inStock = true;
 
   const productName = product?.name || 'Product';
   const productDesc = product?.description || '';
