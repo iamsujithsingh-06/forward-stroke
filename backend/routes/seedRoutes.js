@@ -3,6 +3,6 @@ import { seedDatabase } from '../controllers/seedController.js';
 
 const router = Router();
 
-router.post('/seed', seedDatabase);
+router.get('/seed', seedDatabase);
 
 export default router;
