@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 import User from '../models/User.js';
+import Order from '../models/Order.js';
 import Post from '../models/Post.js';
 import Wishlist from '../models/Wishlist.js';
 import Cart from '../models/Cart.js';
@@ -7,17 +8,21 @@ import Cart from '../models/Cart.js';
 // ========== DASHBOARD ==========
 export const getDashboard = async (_req, res, next) => {
   try {
-    const [totalUsers, totalProducts, totalPosts, totalWishlists, totalCarts] = await Promise.all([
+    const [totalUsers, totalProducts, totalOrders, revenueAgg] = await Promise.all([
       User.countDocuments({ isActive: true }),
       Product.countDocuments({ isActive: true }),
-      Post.countDocuments(),
-      Wishlist.countDocuments(),
-      Cart.countDocuments(),
+      Order.countDocuments(),
+      Order.aggregate([
+        { $match: { orderStatus: { $nin: ['cancelled'] } } },
+        { $group: { _id: null, total: { $sum: '$total' } } },
+      ]),
     ]);
+
+    const totalRevenue = revenueAgg.length > 0 ? revenueAgg[0].total : 0;
 
     res.json({
       success: true,
-      stats: { totalUsers, totalProducts, totalPosts, totalWishlists, totalCarts },
+      stats: { totalUsers, totalProducts, totalOrders, totalRevenue },
     });
   } catch (err) {
     next(err);
@@ -159,6 +164,48 @@ export const deleteAdminPost = async (req, res, next) => {
     const post = await Post.findByIdAndDelete(req.params.id);
     if (!post) return res.status(404).json({ success: false, message: 'Post not found.' });
     res.json({ success: true, message: 'Post deleted.' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// ========== ORDER MANAGEMENT ==========
+export const getAdminOrders = async (req, res, next) => {
+  try {
+    const { page = 1, limit = 20, status } = req.query;
+    const filter = {};
+    if (status) filter.orderStatus = status;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    const total = await Order.countDocuments(filter);
+    const orders = await Order.find(filter)
+      .populate('user', 'name email')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parseInt(limit));
+    res.json({
+      success: true,
+      orders,
+      pagination: { page: parseInt(page), limit: parseInt(limit), total, pages: Math.ceil(total / parseInt(limit)) },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateAdminOrderStatus = async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    const validStatuses = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ success: false, message: `Invalid status. Must be one of: ${validStatuses.join(', ')}` });
+    }
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { orderStatus: status },
+      { new: true, runValidators: true }
+    ).populate('user', 'name email');
+    if (!order) return res.status(404).json({ success: false, message: 'Order not found.' });
+    res.json({ success: true, order });
   } catch (err) {
     next(err);
   }

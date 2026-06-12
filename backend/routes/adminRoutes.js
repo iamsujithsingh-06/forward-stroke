@@ -11,6 +11,8 @@ import {
   getAdminUsers,
   getAdminUserById,
   changeUserRole,
+  getAdminOrders,
+  updateAdminOrderStatus,
   getAdminPosts,
   deleteAdminPost,
   getAnalytics,
@@ -27,6 +29,8 @@ router.post('/products', createAdminProduct);
 router.put('/products/:id', updateAdminProduct);
 router.delete('/products/:id', deleteAdminProduct);
 router.patch('/products/:id/featured', toggleFeaturedProduct);
+router.get('/orders', getAdminOrders);
+router.patch('/orders/:id/status', updateAdminOrderStatus);
 router.get('/users', getAdminUsers);
 router.get('/users/:id', getAdminUserById);
 router.patch('/users/:id/role', changeUserRole);
