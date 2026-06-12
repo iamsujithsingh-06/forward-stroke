@@ -77,6 +77,9 @@ export default function Navbar() {
                       Admin
                     </NavLink>
                   )}
+                  <NavLink to="/orders" className={linkClass}>
+                    My Orders
+                  </NavLink>
                   <NavLink to="/profile" className={linkClass}>
                     {user?.name || 'Profile'}
                   </NavLink>
@@ -143,6 +146,9 @@ export default function Navbar() {
                     Admin
                   </NavLink>
                 )}
+                <NavLink to="/orders" className={linkClass} onClick={() => setMenuOpen(false)}>
+                  My Orders
+                </NavLink>
                 <NavLink to="/profile" className={linkClass} onClick={() => setMenuOpen(false)}>
                   {user?.name || 'Profile'}
                 </NavLink>
