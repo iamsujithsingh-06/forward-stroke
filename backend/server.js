@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'https://forwardstroke.vercel.app',
+    'https://forward-stroke-git-main-sujith-singh-s-projects.vercel.app',
     'http://localhost:5173'
   ],
   credentials: true
