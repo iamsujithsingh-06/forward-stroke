@@ -1,51 +1,53 @@
-import { Link } from 'react-router-dom';
-
-const FOOTER_LINKS = {
-  Shop: ['Products', 'Collections'],
-  Explore: ['International', 'IPL', 'Trending'],
-  Connect: ['Trending'],
-  Support: [],
-};
-
 export default function Footer() {
-  const hasLinks = (links) => links.length > 0;
-
   return (
-    <footer className="bg-surface-900 dark:bg-surface-950 text-surface-300 border-t border-surface-700">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {Object.entries(FOOTER_LINKS).map(([heading, links]) =>
-            hasLinks(links) ? (
-              <div key={heading}>
-                <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-                  {heading}
-                </h4>
-                <ul className="space-y-2">
-                  {links.map((link) => (
-                    <li key={link}>
-                      <Link
-                        to={`/${link.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="text-sm hover:text-primary-400 transition-colors"
-                      >
-                        {link}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <div key={heading} />
-            )
-          )}
-        </div>
+    <footer className="bg-surface-900 dark:bg-surface-950 text-surface-400 border-t border-surface-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="flex flex-col items-center text-center space-y-6">
+          <div className="flex items-center gap-2.5">
+            <svg className="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 19h20l-2-10H4L2 19zm9-8h2v2h-2v-2zm0 4h2v2h-2v-2zM5.5 7l1.5-4h10l1.5 4H5.5z" />
+            </svg>
+            <span className="text-sm font-display font-bold text-white uppercase tracking-wider">
+              Forward Stroke
+            </span>
+          </div>
 
-        <div className="mt-10 pt-8 border-t border-surface-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-surface-400">
-            &copy; {new Date().getFullYear()} Forward Stroke. For Every Cricket Fan.
-          </p>
           <p className="text-xs text-surface-500">
-            Built with passion for the game.
+            &copy; 2026 Forward Stroke. All rights reserved.
           </p>
+
+          <hr className="w-12 border-surface-700" />
+
+          <div className="space-y-2 text-sm">
+            <p className="text-surface-500">
+              Designed &amp; Developed by{' '}
+              <span className="text-surface-300 font-medium">Sujith Singh</span>
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
+              <a
+                href="https://sujithsingh-portfolio.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-400 hover:text-primary-300 transition-colors hover:underline"
+              >
+                Portfolio
+              </a>
+              <a
+                href="https://github.com/iamsujithsingh-06"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-400 hover:text-primary-300 transition-colors hover:underline"
+              >
+                GitHub
+              </a>
+              <a
+                href="mailto:sujithsinghsm@gmail.com"
+                className="text-primary-400 hover:text-primary-300 transition-colors hover:underline"
+              >
+                Contact Me
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
