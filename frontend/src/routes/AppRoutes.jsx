@@ -4,6 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import AdminLayout from '../layouts/AdminLayout';
 import ProtectedRoute from '../components/ProtectedRoute';
 import AdminRoute from '../components/AdminRoute';
+import CustomerRoute from '../components/CustomerRoute';
 import Loading from '../components/Loading';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -53,9 +54,9 @@ export default function AppRoutes() {
         <Route path="/register" element={<L><Register /></L>} />
         <Route path="/access-denied" element={<L><AccessDenied /></L>} />
         <Route path="/profile" element={<ProtectedRoute><L><Profile /></L></ProtectedRoute>} />
-        <Route path="/wishlist" element={<ProtectedRoute><L><Wishlist /></L></ProtectedRoute>} />
-        <Route path="/cart" element={<ProtectedRoute><L><Cart /></L></ProtectedRoute>} />
-        <Route path="/orders" element={<ProtectedRoute><L><Orders /></L></ProtectedRoute>} />
+        <Route path="/wishlist" element={<CustomerRoute><ProtectedRoute><L><Wishlist /></L></ProtectedRoute></CustomerRoute>} />
+        <Route path="/cart" element={<CustomerRoute><ProtectedRoute><L><Cart /></L></ProtectedRoute></CustomerRoute>} />
+        <Route path="/orders" element={<CustomerRoute><ProtectedRoute><L><Orders /></L></ProtectedRoute></CustomerRoute>} />
         <Route path="/order-success" element={<L><OrderSuccess /></L>} />
         <Route path="*" element={<L><NotFound /></L>} />
       </Route>

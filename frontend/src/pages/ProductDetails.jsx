@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { productService } from '../services/productService';
+import { useAuth } from '../hooks/useAuth';
 import SEO from '../components/SEO';
 import WishlistButton from '../components/WishlistButton';
 import CartButton from '../components/CartButton';
@@ -11,6 +12,8 @@ import Error from '../components/Error';
 const FALLBACK_IMG = 'https://placehold.co/600x700/1e293b/475569?text=Product';
 
 export default function ProductDetails() {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -115,10 +118,12 @@ export default function ProductDetails() {
             </span>
           </div>
 
-          <div className="mt-8 flex items-center gap-3">
-            <CartButton productId={product._id} disabled={!inStock} className="flex-1 py-3 text-base" />
-            <WishlistButton productId={product._id} className="p-3" />
-          </div>
+          {!isAdmin && (
+            <div className="mt-8 flex items-center gap-3">
+              <CartButton productId={product._id} disabled={!inStock} className="flex-1 py-3 text-base" />
+              <WishlistButton productId={product._id} className="p-3" />
+            </div>
+          )}
 
           {product.tags?.length > 0 && (
             <div className="mt-6 pt-6 border-t border-surface-200 dark:border-surface-700">

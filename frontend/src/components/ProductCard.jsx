@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import WishlistButton from './WishlistButton';
 import CartButton from './CartButton';
 
 const FALLBACK_IMG = 'https://placehold.co/400x500/1e293b/475569?text=Product';
 
 export default function ProductCard({ product }) {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
   const [imgError, setImgError] = useState(false);
   const imgSrc = imgError ? FALLBACK_IMG : (product.images?.[0] || FALLBACK_IMG);
   const inStock = true;
@@ -64,10 +67,12 @@ export default function ProductCard({ product }) {
           </div>
         </div>
 
-        <div className="mt-3 flex items-center gap-2">
-          <CartButton productId={product._id} disabled={!inStock} />
-          <WishlistButton productId={product._id} />
-        </div>
+        {!isAdmin && (
+          <div className="mt-3 flex items-center gap-2">
+            <CartButton productId={product._id} disabled={!inStock} />
+            <WishlistButton productId={product._id} />
+          </div>
+        )}
       </div>
     </div>
   );
