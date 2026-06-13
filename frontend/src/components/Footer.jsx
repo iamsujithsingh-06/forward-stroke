@@ -20,8 +20,7 @@ export default function Footer() {
 
           <div className="space-y-2 text-sm">
             <p className="text-surface-500">
-              Designed &amp; Developed by{' '}
-              <span className="text-surface-300 font-medium">Sujith Singh</span>
+              Designed &amp; Developed by Sujith Singh S M
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
               <a
@@ -41,10 +40,10 @@ export default function Footer() {
                 GitHub
               </a>
               <a
-                href="mailto:sujithsinghsm@gmail.com"
+                href="mailto:sujithsinghsm@gmail.com?subject=Forward%20Stroke%20Inquiry"
                 className="text-primary-400 hover:text-primary-300 transition-colors hover:underline"
               >
-                Contact Me
+                Contact
               </a>
             </div>
           </div>
