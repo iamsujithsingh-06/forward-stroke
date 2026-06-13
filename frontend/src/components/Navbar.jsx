@@ -35,11 +35,18 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-surface-900/80 backdrop-blur-md border-b border-surface-200 dark:border-surface-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl font-display font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wide">
-              Forward Stroke
-            </span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/" className="flex items-center gap-2">
+              <span className="text-xl font-display font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wide">
+                Forward Stroke
+              </span>
+            </Link>
+            {user?.role === 'admin' && (
+              <NavLink to="/admin" className="px-3 py-1.5 rounded-lg text-sm font-bold text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950 transition-colors">
+                Admin Panel
+              </NavLink>
+            )}
+          </div>
 
           <div className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
@@ -74,11 +81,6 @@ export default function Navbar() {
             <div className="ml-3 pl-3 border-l border-surface-300 dark:border-surface-600 flex items-center gap-2">
               {isAuthenticated ? (
                 <>
-                  {user?.role === 'admin' && (
-                    <NavLink to="/admin" className={linkClass}>
-                      Admin
-                    </NavLink>
-                  )}
                   {user?.role !== 'admin' && (
                     <NavLink to="/orders" className={linkClass}>
                       My Orders
@@ -148,13 +150,8 @@ export default function Navbar() {
             )}
             <hr className="my-2 border-surface-200 dark:border-surface-700" />
             {isAuthenticated ? (
-              <>
-                {user?.role === 'admin' && (
-                  <NavLink to="/admin" className={linkClass} onClick={() => setMenuOpen(false)}>
-                    Admin
-                  </NavLink>
-                )}
-                {user?.role !== 'admin' && (
+                <>
+                  {user?.role !== 'admin' && (
                   <NavLink to="/orders" className={linkClass} onClick={() => setMenuOpen(false)}>
                     My Orders
                   </NavLink>
