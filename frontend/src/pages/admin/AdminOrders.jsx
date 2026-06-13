@@ -65,6 +65,7 @@ export default function AdminOrders() {
                 <th className="text-left px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Order ID</th>
                 <th className="text-left px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Customer</th>
                 <th className="text-left px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Email</th>
+                <th className="text-left px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Items</th>
                 <th className="text-left px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Date</th>
                 <th className="text-right px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Total</th>
                 <th className="text-center px-4 py-3 font-medium text-surface-500 uppercase tracking-wider text-xs">Status</th>
@@ -73,7 +74,7 @@ export default function AdminOrders() {
             <tbody className="divide-y divide-surface-200 dark:divide-surface-700">
               {orders.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-4 py-8 text-center text-surface-400">No orders found.</td>
+                  <td colSpan={7} className="px-4 py-8 text-center text-surface-400">No orders found.</td>
                 </tr>
               ) : (
                 orders.map((order) => {
@@ -88,6 +89,20 @@ export default function AdminOrders() {
                       </td>
                       <td className="px-4 py-3 font-medium text-surface-900 dark:text-white">{user.name || 'N/A'}</td>
                       <td className="px-4 py-3 text-surface-600 dark:text-surface-400">{user.email || 'N/A'}</td>
+                      <td className="px-4 py-3 text-surface-900 dark:text-surface-100">
+                        {order.items?.length > 0 ? (
+                          <div className="space-y-1">
+                            {order.items.map((item, idx) => (
+                              <div key={idx} className="text-xs leading-tight">
+                                <span className="font-medium">{item.name}</span>
+                                <span className="text-surface-400 ml-1">×{item.quantity}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-surface-400 text-xs">—</span>
+                        )}
+                      </td>
                       <td className="px-4 py-3 text-surface-600 dark:text-surface-400 text-xs">
                         {new Date(order.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })}
                       </td>
